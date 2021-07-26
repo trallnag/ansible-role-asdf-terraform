@@ -1,0 +1,17 @@
+argument_specs:
+  main:
+    short_description: Main entry point for the "{{ role_name }}" role
+    options:
+      asdf_terraform_version:
+        default: 1.0.3
+        type: raw
+        required: false
+        description: >-
+          Terraform version to install and activate globally.
+
+      asdf_terraform_git_url:
+        default: https://github.com/asdf-community/asdf-hashicorp.git
+        type: raw
+        required: false
+        description: >-
+          Git repo containing the plugin.

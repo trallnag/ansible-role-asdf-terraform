@@ -1,0 +1,22 @@
+- name: Add plugin
+  shell: asdf plugin-add terraform {{ asdf_terraform_git_url }} || true
+
+- name: Install package
+  shell: asdf install terraform {{ asdf_terraform_version }} || true
+
+- name: Set global
+  shell: asdf global terraform {{ asdf_terraform_version }} || true
+
+- name: Check version
+  shell: |
+    if [ "$(terraform --version | head -n 1)" != "Terraform v{{ asdf_terraform_version }}" ]; then
+      exit 1
+    fi
+
+- name: Bash tab-completion
+  blockinfile:
+    path: ~/.bashrc
+    insertafter: EOF
+    marker: "# {mark} :: ANSIBLE MANAGED BLOCK :: {{ role_name }} :: Bash tab-completion"
+    block: |
+      complete -C /home/jfn/.asdf/installs/terraform/{{ asdf_terraform_version }}/bin/terraform terraform
