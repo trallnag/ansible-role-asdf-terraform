@@ -13,14 +13,13 @@ Functions you can use like this 'bash run.sh <function name>':
 EOF
 }
 
-if [[ $# -eq 0 ]]
-then
+if [[ $# -eq 0 ]]; then
     _help
 fi
 
-for arg in "$@"
-do
+for arg in "$@"; do
     if  [ $arg = "help" ] || [ $arg = "-help" ] || [ $arg = "--help" ]; then _help
     elif [ $arg = "get-role-id" ]; then _get_role_id
+    else _help
     fi
 done
